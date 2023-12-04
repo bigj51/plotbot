@@ -24,7 +24,8 @@ def create_app(config_name):
 
     # register blueprints
     app.register_blueprint(api_bp)
-    app.register_blueprint(web_bp)
-
+    if not app.config['DISABLE_UI']:
+        app.register_blueprint(web_bp)
+        
     return app
 
