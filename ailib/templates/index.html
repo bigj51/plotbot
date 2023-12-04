@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Head Section: Includes Meta, Title, and Linked Stylesheets -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mad Libs Story</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .autofill-btn {
+            cursor: pointer;
+            display: inline-block;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    <!-- Main Content Section -->
+    <div class="container mt-5">
+        <div class="mb-3 d-flex align-items-center">
+            <!-- Story Length Dropdown -->
+            <label for="storyLength" class="form-label me-2">Length:</label>
+            <select class="form-select me-3" id="storyLength" style="width: auto;">
+                {% for length in STORY_LENGTHS %}
+                    <option value="{{ length }}">{{ length }}</option>
+                {% endfor %}
+            </select>
+    
+            <!-- Story Type Dropdown -->
+            <label for="storyType" class="form-label me-2">Type:</label>
+            <select class="form-select me-3" id="storyType" style="width: auto;">
+                {% for type in STORY_TYPES %}
+                    <option value="{{ type }}">{{ type }}</option>
+                {% endfor %}
+            </select>
+    
+            <!-- Get New Story Button -->
+            <button class="btn btn-primary" onclick="getStory()">
+                Get New Story 
+                <span class="spinner-border spinner-border-sm" role="status" id="loadingSpinner" style="display: none;"></span>
+            </button>
+        </div>
+        </div>
+
+        <!-- Fillables Form: This is where the text boxes for fillables will be displayed -->
+        <form id="fillablesForm" class="mb-3" style="display: none;">
+            <!-- Fillables text boxes will be added here dynamically using JavaScript -->
+        </form>
+
+        <!-- Story Area: This is where the story with fillables will be displayed -->
+        <textarea class="form-control mt-3" id="storyArea" rows="10" readonly style="display: none;"></textarea>
+
+        <!-- JavaScript Section: Includes Linked Scripts and Inline Script -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ url_for('static', filename='js/ailib.js') }}"></script>    
+    </div>
+</body>
+
+</html>
